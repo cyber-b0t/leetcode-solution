@@ -1,4 +1,4 @@
-// Last updated: 6/30/2026, 1:35:37 AM
+// Last updated: 6/30/2026, 1:36:28 AM
 1class Solution {
 2    public int romanToInt(String s) {
 3        HashMap<Character, Integer> mpp = new HashMap<>();
@@ -11,31 +11,18 @@
 10        mpp.put('D', 500);
 11        mpp.put('M', 1000);
 12
-13        int num = 0;
+13        int ans = 0;
 14
-15        int L = 0, R = 1;
-16
-17        while (R < s.length()) {
-18            int a = mpp.get(s.charAt(L));
-19            int b = mpp.get(s.charAt(R));
-20
-21            if (a < b) {
-22                num += (b - a);
-23                L += 2;
-24                R += 2;
-25            } else {
-26                num += a;
-27                L++;
-28                R++;
-29            }
-30        }
-31
-32        // Process any remaining character
-33        while (L < s.length()) {
-34            num += mpp.get(s.charAt(L));
-35            L++;
-36        }
-37
-38        return num;
-39    }
-40}
+15        for (int i = 0; i < s.length(); i++) {
+16            int curr = mpp.get(s.charAt(i));
+17
+18            if (i + 1 < s.length() && curr < mpp.get(s.charAt(i + 1))) {
+19                ans -= curr;
+20            } else {
+21                ans += curr;
+22            }
+23        }
+24
+25        return ans;
+26    }
+27}
