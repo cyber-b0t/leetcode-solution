@@ -1,28 +1,21 @@
-// Last updated: 6/27/2026, 2:00:46 AM
+// Last updated: 7/8/2026, 8:43:37 PM
 1class Solution {
 2    public int trap(int[] height) {
-3        Stack<Integer> st = new Stack<>();
-4
-5        int i=0,j=height.length-1;
-6        int Lmax=-1,Rmax=-1;
-7
-8        int lvl=0;
-9
-10        while(i<j){
-11            Lmax = Math.max(Lmax,height[i]);
-12            Rmax = Math.max(Rmax,height[j]);
-13
-14            if(Lmax>Rmax){
-15                lvl += Rmax-height[j];
-16                j--;
-17            }else{
-18                lvl += Lmax-height[i];
-19                i++;
-20            }
-21
-22        }
-23
-24        return lvl;
-25
-26    }
-27}
+3        int L = 0, R = height.length - 1;
+4        int Lmax = 0, Rmax = 0;
+5        int water = 0;
+6
+7        while (L < R) {
+8            if (height[L] < height[R]) {
+9                if (height[L] >= Lmax) Lmax = height[L];
+10                else water += Lmax - height[L];
+11                L++;
+12            } else {
+13                if (height[R] >= Rmax) Rmax = height[R];
+14                else water += Rmax - height[R];
+15                R--;
+16            }
+17        }
+18        return water;
+19    }
+20}
