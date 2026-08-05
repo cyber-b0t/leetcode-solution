@@ -1,39 +1,35 @@
-// Last updated: 7/27/2026, 2:55:22 AM
+// Last updated: 8/6/2026, 1:33:29 AM
 1class Solution {
 2    Boolean[][] dp;
-3    public boolean backtrack(String s,int idx,int openCount){
-4
-5        
-6        if(idx==s.length() && openCount==0){
-7            return true;
-8        }
-9        if(idx==s.length() && openCount>0){
-10            return false;
+3    public boolean backtrack(String s , int idx , int openCount){
+4        if(openCount<0) return false;
+5        if(idx==s.length()){
+6            return openCount==0;
+7        }
+8
+9        if (dp[idx][openCount] != null){
+10            return dp[idx][openCount];
 11        }
-12        if(openCount<0){
-13            return false;
-14        }
-15
-16        if(dp[idx][openCount]!=null){
+12        
+13        char c = s.charAt(idx);
+14
+15        if(c=='*'){
+16            dp[idx][openCount] = backtrack(s,idx+1,openCount+1) || backtrack(s,idx+1,openCount) || backtrack(s,idx+1,openCount-1);
 17            return dp[idx][openCount];
 18        }
-19
-20        char c = s.charAt(idx);
-21
-22        if(c=='*'){
-23            dp[idx][openCount] = (backtrack(s,idx+1,openCount+1) || backtrack(s,idx+1,openCount-1) || backtrack(s,idx+1,openCount));
-24            
+19        if(c=='('){
+20            dp[idx][openCount] = backtrack(s,idx+1,openCount+1);
+21            return dp[idx][openCount];
+22        }
+23        if(c==')'){
+24            dp[idx][openCount] = backtrack(s,idx+1,openCount-1);
 25            return dp[idx][openCount];
-26        }else if(c=='('){
-27            dp[idx][openCount] = backtrack(s,idx+1,openCount+1);
-28            return dp[idx][openCount];
-29        }else{
-30            dp[idx][openCount] = backtrack(s,idx+1,openCount-1);
-31            return dp[idx][openCount];
-32        }
+26        }
+27
+28        return false;
+29    }
+30    public boolean checkValidString(String s) {
+31        dp = new Boolean[s.length() + 1][s.length() + 1];
+32        return backtrack(s,0,0);
 33    }
-34    public boolean checkValidString(String s) {
-35        dp = new Boolean[s.length()+1][s.length()+1];
-36        return backtrack(s,0,0);
-37    }
-38}
+34}
