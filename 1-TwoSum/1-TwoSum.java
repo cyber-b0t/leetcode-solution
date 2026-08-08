@@ -1,4 +1,4 @@
-// Last updated: 7/10/2026, 8:05:49 PM
+// Last updated: 8/9/2026, 2:16:20 AM
 1class Solution {
 2    public int[] twoSum(int[] nums, int target) {
 3        HashMap<Integer,Integer> freq = new HashMap<>();
