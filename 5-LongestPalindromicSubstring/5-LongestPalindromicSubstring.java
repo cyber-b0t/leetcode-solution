@@ -1,35 +1,35 @@
-// Last updated: 6/30/2026, 3:01:14 AM
-class Solution {
-    public String longestPalindrome(String s) {
-        int n = s.length();
-        if(n==1) return s;
-        int i=0;
-
-        int max=1;
-        int start=0;
-
-        while(i<2*n-1){
-            int L=0,R=0;
-            if(i%2==1){
-                L = i/2;
-                R = L+1;
-            }else{
-                L=i/2-1;
-                R=i/2+1;
-            }
-
-            while(L>=0 && R<=n-1 && s.charAt(L) == s.charAt(R)){
-                if(R - L + 1 > max){
-                    max = R-L+1;
-                    start=L;
-                }
-                L--;
-                R++;
-
-            }
-            i++;
-        }
-
-        return s.substring(start,start+max);
-    }
-}
+// Last updated: 8/12/2026, 2:38:42 AM
+1class Solution {
+2    public String longestPalindrome(String s) {
+3        int n = s.length();
+4        if(n==1) return s;
+5        int i=0;
+6
+7        int max=1;
+8        int start=0;
+9
+10        while(i<2*n-1){
+11            int L=0,R=0;
+12            if(i%2==1){
+13                L = i/2;
+14                R = L+1;
+15            }else{
+16                L=i/2-1;
+17                R=i/2+1;
+18            }
+19
+20            while(L>=0 && R<=n-1 && s.charAt(L) == s.charAt(R)){
+21                if(R - L + 1 > max){
+22                    max = R-L+1;
+23                    start=L;
+24                }
+25                L--;
+26                R++;
+27
+28            }
+29            i++;
+30        }
+31
+32        return s.substring(start,start+max);
+33    }
+34}
