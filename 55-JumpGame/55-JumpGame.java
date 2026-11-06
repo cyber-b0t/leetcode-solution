@@ -1,13 +1,14 @@
-// Last updated: 7/28/2026, 2:01:48 AM
+// Last updated: 11/7/2026, 3:56:04 AM
 1class Solution {
 2    public boolean canJump(int[] nums) {
-3        int maxD=0;
-4        for(int i=0;i<nums.length;i++){
-5            int n = nums[i];
-6            if(i>maxD) return false;
-7            maxD = Math.max(maxD,i+n);
-8        }
-9
-10        return true;
-11    }
-12}
+3        int d=0;
+4
+5        for(int i=0;i<nums.length;i++){
+6            if(i>d) return false;
+7            d = Math.max(d,i+nums[i]);
+8            if(d>=nums.length-1) return true;
+9        }
+10
+11        return false;
+12    }
+13}
