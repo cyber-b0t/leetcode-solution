@@ -1,54 +1,48 @@
-// Last updated: 7/7/2026, 12:04:53 AM
+// Last updated: 11/19/2026, 7:09:14 PM
 1class Solution {
-2    public int[] searchRange(int[] nums, int target) {
-3        int first = findFirst(nums, target);
-4
-5        if (first == -1) {
-6            return new int[]{-1, -1};
-7        }
-8
-9        int last = findLast(nums, target);
-10
-11        return new int[]{first, last};
-12    }
-13
-14    private int findFirst(int[] nums, int target) {
-15        int low = 0, high = nums.length - 1;
-16        int ans = -1;
+2    
+3    public int[] searchRange(int[] nums, int target) {
+4        int first = lowerbound(nums,target);
+5        int last = upperbound(nums,target);
+6        if (first>last){
+7            return new int[]{-1,-1};
+8        }
+9        return new int[]{first,last};
+10       }
+11        public int upperbound(int[] nums, int target){
+12        int L=0;
+13        int H=nums.length-1;
+14        int ans=-1;
+15        while(L<=H){
+16            int mid = L+(H-L)/2;
 17
-18        while (low <= high) {
-19            int mid = low + (high - low) / 2;
-20
-21            if (nums[mid] == target) {
-22                ans = mid;
-23                high = mid - 1;  
-24            } else if (nums[mid] < target) {
-25                low = mid + 1;
-26            } else {
-27                high = mid - 1;
-28            }
-29        }
-30
-31        return ans;
-32    }
-33
-34    private int findLast(int[] nums, int target) {
-35        int low = 0, high = nums.length - 1;
-36        int ans = -1;
-37
-38        while (low <= high) {
-39            int mid = low + (high - low) / 2;
-40
-41            if (nums[mid] == target) {
-42                ans = mid;
-43                low = mid + 1;   
-44            } else if (nums[mid] < target) {
-45                low = mid + 1;
-46            } else {
-47                high = mid - 1;
-48            }
-49        }
-50
-51        return ans;
-52    }
-53}
+18            if(nums[mid]<=target){
+19                L = mid+1;
+20                ans = mid;
+21            }else{
+22                H = mid-1;
+23            }
+24        }
+25
+26        return ans;
+27    }
+28
+29    public int lowerbound(int[] nums, int target){
+30        int L=0;
+31        int H=nums.length-1;
+32        int ans=-1;
+33        while(L<=H){
+34            int mid = L+(H-L)/2;
+35            if(nums[mid]<target){
+36                L = mid+1;
+37                ans = mid;
+38            }else{
+39                H = mid-1;
+40            }
+41        }
+42
+43        return ans+1;
+44    }
+45
+46    } 
+47
